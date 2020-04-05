@@ -1,0 +1,2 @@
+rootProject.name='SVIP-like Menu'
+include ':app'
