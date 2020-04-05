@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/button_home"
-        style="?buttonBarButtonStyle"
+        style="?borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="start|center_vertical"
@@ -22,7 +22,7 @@
 
     <Button
         android:id="@+id/button_info"
-        style="?buttonBarButtonStyle"
+        style="?borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="start|center_vertical"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.transition.TransitionManager
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), WithDrawer {
@@ -17,9 +18,18 @@ class MainActivity : AppCompatActivity(), WithDrawer {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, HomeFragment())
             .commit()
+
+        button_home.setOnClickListener { changeFragment(HomeFragment()) }
+        button_info.setOnClickListener { changeFragment(InfoFragment()) }
     }
 
-    override fun openDrawer() = animateDrawer(true)
+    private fun changeFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+            .commit()
+        animateDrawer(close)
+    }
+
+    override fun openDrawer() = animateDrawer(open)
 
     private fun animateDrawer(open: Boolean) {
         TransitionManager.beginDelayedTransition(scene_root)
@@ -32,12 +42,17 @@ class MainActivity : AppCompatActivity(), WithDrawer {
             params.width = ViewGroup.LayoutParams.MATCH_PARENT
             params.height = ViewGroup.LayoutParams.MATCH_PARENT
         }
-
         fragment_container.layoutParams = params
+        TransitionManager.endTransitions(scene_root)
         drawerOpen = open
     }
 
     override fun onBackPressed() {
-        if (drawerOpen) animateDrawer(false) else super.onBackPressed()
+        if (drawerOpen) animateDrawer(close) else super.onBackPressed()
+    }
+
+    companion object {
+        val close = false
+        val open = true
     }
 }
