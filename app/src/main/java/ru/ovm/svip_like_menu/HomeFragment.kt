@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context !is Foldable) {
+        if (context !is WithDrawer) {
             throw IllegalArgumentException("Host activity must implement Foldable")
         }
     }
@@ -21,5 +22,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        menu.setOnClickListener { (requireActivity() as WithDrawer).openDrawer() }
     }
 }

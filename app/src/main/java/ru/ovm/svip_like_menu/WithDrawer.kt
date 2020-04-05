@@ -1,5 +1,5 @@
 package ru.ovm.svip_like_menu
 
-interface Foldable {
+interface WithDrawer {
     fun openDrawer()
 }
